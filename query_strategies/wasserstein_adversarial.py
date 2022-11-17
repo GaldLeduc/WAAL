@@ -57,7 +57,7 @@ class WAAL:
         #use_cuda     = torch.cuda.is_available()
         self.device  = torch.device("cpu")#torch.device("cuda" if use_cuda else "cpu")
 
-        self.selection = 2
+        self.selection = 1
         # for cifar 10 or svhn or fashion mnist  self.selection = 10
         
         
@@ -162,7 +162,7 @@ class WAAL:
                 
                 opt_phi.zero_grad()
                 
-                phi_ascent = (-1/len(self.Y)) * abs(self.phi(unlabel_x).mean() - gamma_ratio * self.phi(label_x).mean())
+                phi_ascent = (-1/len(self.Y)) * (self.phi(unlabel_x).mean() - gamma_ratio * self.phi(label_x).mean())
                 
                 phi_ascent.backward()
                 #opt_phi.step()
