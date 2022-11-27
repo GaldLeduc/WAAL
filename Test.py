@@ -12,9 +12,9 @@ DATA_NAME   = 'Boston2'
 
 
 
-NUM_INIT_LB = 4
-NUM_QUERY   = 4
-NUM_ROUND   = 39
+NUM_INIT_LB = 10
+NUM_QUERY   = 1
+NUM_ROUND   = 394
 
 
 args_pool = {
@@ -44,7 +44,7 @@ print('number of testing pool: {}'.format(n_test))
 # setting training parameters
 alpha = 1
 epoch = 30
-epsilon_grad = 1
+epsilon = 1
 
 # Generate the initial labeled pool
 idxs_lb = np.zeros(n_pool, dtype=bool)
@@ -59,7 +59,7 @@ ffd_h, ffd_phi = get_net(DATA_NAME)
 train_handler = get_handler(DATA_NAME)
 test_handler  = dataset.get_handler(DATA_NAME)
 
-strategy = WAAL(X_tr,Y_tr,idxs_lb,ffd_h,ffd_phi,train_handler,test_handler,args,epsilon_grad)
+strategy = WAAL(X_tr,Y_tr,idxs_lb,ffd_h,ffd_phi,train_handler,test_handler,args,epsilon)
 
 
 # print information
@@ -113,6 +113,6 @@ print(acc)
 
 import csv
 
-with open("Test_modif_17-11-2022.csv", "w") as f:
+with open("Test_modif_17-11-2022_run1.csv", "w") as f:
     writer = csv.writer(f)
-    writer.writerows(acc)
+    writer.writerow(acc)
